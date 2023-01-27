@@ -15,12 +15,12 @@ Host(`chrome.local.example.com`)
 Configure your envoriment in `docker-compose.yml` file. You can find more information about envoriment variable in [here](https://www.browserless.io/docs/docker).
 
 ```yaml
-    - DEFAULT_BLOCK_ADS=true
-    - ENABLE_CORS=true
-    - TOKEN=CHANGE_ME # Leave blank to disable | You can generate token with `openssl rand -hex 16`
-    - DEMO_MODE=false
-    - MAX_CONCURRENT_SESSIONS=10
-    - CONNECTION_TIMEOUT=60000
+- DEFAULT_BLOCK_ADS=true
+- ENABLE_CORS=true
+- TOKEN=CHANGE_ME # Leave blank to disable | You can generate token with `openssl rand -hex 16`
+- DEMO_MODE=false
+- MAX_CONCURRENT_SESSIONS=10
+- CONNECTION_TIMEOUT=60000
 ```
 
 if you use token then your connection url will be like this
