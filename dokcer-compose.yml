@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  chrome:
+    image: browserless/chrome:latest
+    container_name: chrome
+    restart: unless-stopped
+    environment: # more options: https://www.browserless.io/docs/docker
+      - DEFAULT_BLOCK_ADS=true
+      - ENABLE_CORS=true
+      - TOKEN=CHANGE_ME # Leave blank to disable | You can generate token with `openssl rand -hex 16`
+      - DEMO_MODE=false
+      - MAX_CONCURRENT_SESSIONS=10
+      - CONNECTION_TIMEOUT=60000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.chrome.entrypoints=http"
+      - "traefik.http.routers.chrome.rule=Host(`chrome.local.example.com`)"
+      - "traefik.http.middlewares.chrome-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.chrome.middlewares=chrome-https-redirect"
+      - "traefik.http.routers.chrome-secure.entrypoints=https"
+      - "traefik.http.routers.chrome-secure.rule=Host(`chrome.local.example.com`)"
+      - "traefik.http.routers.chrome-secure.tls=true"
+      - "traefik.http.routers.chrome-secure.service=chrome"
+      - "traefik.http.services.chrome.loadbalancer.server.port=3000"
+      - "traefik.docker.network=proxy"
+
+networks:
+  proxy:
+    external: true
