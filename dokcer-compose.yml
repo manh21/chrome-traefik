@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     environment: # more options: https://www.browserless.io/docs/docker
       - DEFAULT_BLOCK_ADS=true
-      - ENABLE_CORS=true
+      - ENABLE_CORS=false
       - TOKEN=CHANGE_ME # Leave blank to disable | You can generate token with `openssl rand -hex 16`
       - DEMO_MODE=false
       - MAX_CONCURRENT_SESSIONS=10
